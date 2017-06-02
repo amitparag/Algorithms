@@ -1,0 +1,406 @@
+1 Russian Peasant Multiplication: Multiply two numbers without using the multiplication algorithm
+
+Let the two given numbers be 'a' and 'b'
+1) Initialize result 'res' as 0.
+2) Do following while 'b' is greater than 0
+   a) If 'b' is odd, add 'a' to 'res'
+   b) Double 'a' and halve 'b'
+3) Return 'res'.
+
+
+public int multiply(int a,int b){
+        int res = 0;
+        while(b > 0){
+            if(b % 2 != 0){
+                res += a;
+            }
+            a = a<<1;
+            b = b>>1;
+        }
+        return res;
+    }
+
+
+
+
+------------------------------------------------------------------------------------------
+2 Tower of Hanoi:
+
+ If n=1, we simply move disk 1 from pole A to pole B.
+ For n > 1 : First, move n – 1 disks from pole A to pole C, using pole B as a temporary.
+
+             Then move disk n from pole A to pole B
+
+             Finally, move n – 1 from pole C to pole B, using pole A as a temporary.
+
+
+ public void solve(int n, String start, String auxiliary, String end) {
+       if (n == 1) {
+           System.out.println(start + " -> " + end);
+       } else {
+           solve(n - 1, start, end, auxiliary);
+           System.out.println(start + " -> " + end);
+           solve(n - 1, auxiliary, start, end);
+       }
+   }
+
+-----------------------------------------------------------------------------------------
+3 MergeSort:
+
+MergeSort(arr[], l,  r)
+If r > l
+     1. Find the middle point to divide the array into two halves:
+             middle m = (l+r)/2
+     2. Call mergeSort for first half:
+             Call mergeSort(arr, l, m)
+     3. Call mergeSort for second half:
+             Call mergeSort(arr, m+1, r)
+     4. Merge the two halves sorted in step 2 and 3:
+             Call merge(arr, l, m, r)
+
+
+
+
+
+void merge(int arr[], int l, int m, int r)
+    {
+        // Find sizes of two subarrays to be merged
+        int n1 = m - l + 1;
+        int n2 = r - m;
+
+        /* Create temp arrays */
+        int L[] = new int [n1];
+        int R[] = new int [n2];
+
+        /*Copy data to temp arrays*/
+        for (int i=0; i<n1; ++i)
+            L[i] = arr[l + i];
+        for (int j=0; j<n2; ++j)
+            R[j] = arr[m + 1+ j];
+
+
+        /* Merge the temp arrays */
+
+        // Initial indexes of first and second sub arrays
+        int i = 0, j = 0;
+
+        // Initial index of merged sub array array
+        int k = l;
+        while (i < n1 && j < n2)
+        {
+            if (L[i] <= R[j])
+            {
+                arr[k] = L[i];
+                i++;
+            }
+            else
+            {
+                arr[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+
+        /* Copy remaining elements of L[] if any */
+        while (i < n1)
+        {
+            arr[k] = L[i];
+            i++;
+            k++;
+        }
+
+        /* Copy remaining elements of R[] if any */
+        while (j < n2)
+        {
+            arr[k] = R[j];
+            j++;
+            k++;
+        }
+    }
+
+    // Main function that sorts arr[l..r] using
+    // merge()
+    void sort(int arr[], int l, int r)
+    {
+        if (l < r)
+        {
+            // Find the middle point
+            int m = (l+r)/2;
+
+            // Sort first and second halves
+            sort(arr, l, m);
+            sort(arr , m+1, r);
+
+            // Merge the sorted halves
+            merge(arr, l, m, r);
+        }
+    }
+
+
+
+-------------------------------------------------------------------------------------
+
+4 Quick Sort:
+
+Partition:
+
+Choose a pivot value (in this case, choose the value of the middle element)
+
+Initialize left and right pointers at extremes.
+
+Starting at the left pointer and moving to the right, find the first element which is greater than or equal to the pivot value.
+
+Similarly, starting at the right pointer and moving to the left, find the first element, which is smaller than pivot value
+
+Swap elements found in 3 and 4.
+
+Repeat 3,4,5 until left pointer is greater or equal to right pointer. Return LeftPointer, this will be the position of pivot
+
+Repeat the whole thing for the two subarray to the left and the right of the left pointer.
+
+
+
+
+
+--------------------------------------------------------------------------------------------
+
+5 Exponentiation:
+
+FastPower(a, n):
+if n = 1
+return a
+else
+x ? FastPower(a,n/2)
+if n is even
+return x · x
+else
+return x · x · a
+
+
+------------------------------------------------------------------------------------------
+6 N queens
+
+------------------------------------------------------------------------------------------
+
+7 Subset Sum : Recursion
+
+Array a , size n, sum s-
+
+Base Case:
+if sum = 0 , return true
+if n = 0 and sum != 0, return false
+
+if last element a[n], ignore it and recurse for subset(n-1)
+
+else
+ Include the last element, recur for n = n-1, sum = sum – set[n-1]
+ Exclude the last element, recur for n = n-1.
+
+
+-------------------------------------------------------------------------------------------
+8 Reverse a LinkedList:
+
+Node reverse(Node node)
+ {
+        Node prev = null;
+        Node current = node;
+        Node next = null;
+        while (current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        node = prev;
+        return node;
+    }
+
+
+
+
+--------------------------------------------------------------------------------------------
+9 Check for BST:
+
+result[] = Inorder Traversal
+If result is in ascending then return true
+
+-------------------------------------------------------------------------------------------
+
+10 Minimum Element in a Sorted and rotated array:
+
+
+The minimum element in a sorted and rotated array is the one whose previous
+and next elements are greater than it.
+
+Do a binary search for that element
+
+--------------------------------------------------------------------------------------------
+11 Euclid GCD:
+
+p,q
+
+if q ==0 return p
+return (q, p%q)
+
+--------------------------------------------------------------------------------------------
+12 Reverse array elements
+
+int N = a.length;
+for (int i = 0; i < N/2; i++)
+{
+ double temp = a[i];
+ a[i] = a[N-1-i];
+ a[N-i-1] = temp;
+}
+
+---------------------------------------------------------------------
+13 Square Root int x
+
+ Start with 'start' = 0, end = (x+1)/2,
+ Do following while 'start' is smaller than or equal to 'end'.
+      a) Compute 'mid' as (start + end)/2
+      b) compare mid*mid with x.
+      c) If x is equal to mid*mid, return mid.
+      d) If x is greater, do binary search between mid+1 and end. In this case, we also update ans (Note that we need floor).
+      e) If x is smaller, do binary search between start and mid-1
+
+
+----------------------------------------------------------------------------
+14 Accessing an instance member means accessing a field or attribute of the instance, not the instance itself since that would not compile. A dot does not literally mean "accessing" in the exact way you think and I guess that's the source of confusion you have. The dot is used to call a method on a certain object (see this link) or to access a field of an object (or class if the field is static).
+
+For example, assuming the class is defined as follows:
+
+class MyClass {
+
+   private int x;
+
+   static void foo() {
+      ... // foo cannot access member x
+   }
+}
+So in method foo, you can't reference x because it is a member field of MyClass that is bound to an instance of MyClass.
+
+
+
+
+---------------------------------------------------------------------------
+15
+
+The break statement, which immediately exits the loop
+
+The continue statement, which immediately begins the next iteration of the
+loop
+
+----------------------------------------------------------------------------
+16: Callback
+
+Suppose Insertion.sort(a) is used. 'a' can stand for an array or a file called 'a', or a string . So how
+does the generic Insertion method knows the data type to be sorted?
+
+Callbacks are reference to executable code. Every object has a "comparable" interface built into java. The
+Sort function calls back this comparable interface to know the data type. Callbacks in java are implemented
+through interfaces. Generic Sort methods do not have a data type. The type of data is handled by comparable.
+
+The comparable interface returns 0 or -1 or +1 if two items are equal , one is less than the other or otherwise.
+
+-----------------------------------------------------------------------------------------------------
+
+17 Time Analysis :
+
+String Concatenation is not a constant time algorithm. It takes O(n) time, where n is the length of the string.
+
+1-D and 2-D array allocation takes cN and cN^2  , where c is some constant and N is the size.
+
+1, N, Log(N), NLog(N), N^2, N^3 and 2^N are the general order of growth of algorithms.
+
+1 - Constant time
+
+N - Linear Time, e.g One Loop
+
+Log(N) - Logarithmic time , divide in half algorithms like Binary Search
+
+NLog(N) - Linearithmic time , divide and conquer like MergeSort
+
+N^2 - Quadratic time , double loops
+
+N^3 - Cubic time, triple loop
+
+2^N - Exponential time, check all subsets, exhautive search
+--------------------------------------------------------------------------------------------
+
+18 Space Analysis :
+
+Primitive type: 4 bytes for int, 8 bytes for double
+
+Object reference: 8 bytes.
+
+Array: 24 bytes + memory for each array entry.
+
+Object: 16 bytes + memory for each instance variable
+
+ 8 bytes if inner class (for pointer to enclosing class).
+
+Padding: round up to multiple of 8 bytes.
+
+--------------------------------------------------------------------------------------
+19
+
+Static methods in java belong to the class (not an instance of it).
+
+They use no instance variables and will usually take input from the parameters, perform actions on it,
+then return some result.
+Instances methods are associated with objects and, as the name implies, can use instance variables.
+
+------------------------------------------------------------------------------------
+20 Iterators:
+
+Go through each element without caring about the data structure in which the elements are stored
+Iterable is a class that has the method 'iterator'. 'Iterator ' has tow methods in it : hasNext() and next()
+
+--------------------------------------------------------------------------------------
+
+21 Dijkstra 2 stack Algorithm for evaluating infix expressions:
+
+Value : push into the value stack
+Operator : push in the operator stack
+Left parenthesis : ignore
+Right Parenthesis : pop two values from value stack and an operator from operator stack
+and compute and send the result back to value stack
+
+
+-------------------------------------------------------------------------------------
+22 Assertion : Statement to test logic bugs and documents code
+
+ Java assert statement:  assert(condition)  Throws exception unless the boolean condition is true
+
+ Assert statements can be enabled or disabled at runtime without any cost in production code.
+ Use assert to check internal invariants and not external arguments. See Merge Sort
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
